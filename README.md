@@ -26,6 +26,12 @@ Everything you'd normally change lives in `photos.js`:
 
 Drop new images into `images/` and add a matching line in `photos.js`.
 
+## Editing the artist statement
+
+The statement is in **`artist-statement.md`** and is loaded into the page at
+runtime — edit that file (plain Markdown: blank line between paragraphs,
+`*italic*`, `**bold**`, `# heading`). No need to touch `index.html`.
+
 ## Image export
 
 Export photos for the web at a **fixed long edge of ~2048 px** (not a

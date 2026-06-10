@@ -358,3 +358,38 @@ preloadThen(() => {
   setBeadAt(stops[startIdx].len);
   applyFilter(CATEGORIES[startIdx]);
 });
+
+/* ============================================================
+   5. Artist statement — loaded from artist-statement.md so that file
+   is the single source you edit. (Works over http/https; if you ever
+   open index.html straight off disk via file://, the browser blocks
+   the fetch — use the local server instead.)
+   ============================================================ */
+function renderMarkdown(md) {
+  const esc = (s) =>
+    s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const inline = (s) =>
+    esc(s)
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")   // **bold**
+      .replace(/\*([^*]+)\*/g, "<em>$1</em>");              // *italic*
+  return md
+    .replace(/\r\n/g, "\n")
+    .split(/\n{2,}/)                    // blank line separates blocks
+    .map((b) => b.trim())
+    .filter(Boolean)
+    .map((b) => {
+      const h = b.match(/^(#{1,3})\s+(.*)$/);               // # heading
+      if (h) return `<h2 class="statement-title">${inline(h[2])}</h2>`;
+      return `<p>${inline(b.replace(/\n/g, " "))}</p>`;      // paragraph
+    })
+    .join("\n");
+}
+
+(function loadStatement() {
+  const el = document.getElementById("statement");
+  if (!el) return;
+  fetch("artist-statement.md")
+    .then((r) => (r.ok ? r.text() : Promise.reject(r.status)))
+    .then((md) => { el.innerHTML = renderMarkdown(md); })
+    .catch(() => { /* statement just stays empty if it can't be loaded */ });
+})();
