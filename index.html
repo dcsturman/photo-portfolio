@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniel Sturman — Photography</title>
+
+  <!-- Fonts: Fraunces (headings) + Inter (body / UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="site-title">Daniel Sturman</h1>
+    <p class="site-sub">Photography</p>
+  </header>
+
+  <!-- Bead-on-a-wire category filter -->
+  <nav class="filter" aria-label="Filter photos by category">
+    <svg id="wire" class="wire" viewBox="0 0 1000 210" role="group" aria-label="Drag the bead to choose a category">
+      <defs>
+        <radialGradient id="beadGrad" cx="35%" cy="30%" r="75%">
+          <stop offset="0%"  stop-color="#b6ffc1" />
+          <stop offset="45%" stop-color="#3ad94c" />
+          <stop offset="100%" stop-color="#199a2b" />
+        </radialGradient>
+      </defs>
+      <path id="wirePath" class="wire-track"
+        d="M 28,150
+           C 110,150 150,150 175,120
+           C 205,84 150,40 110,72
+           C 78,98 120,150 180,138
+           C 250,124 270,70 340,70
+           C 410,70 430,150 500,150
+           C 560,150 575,96 545,72
+           C 512,46 470,92 505,118
+           C 545,148 620,140 660,108
+           C 700,76 720,52 780,72
+           C 822,86 815,140 855,150
+           C 905,162 940,120 975,86" />
+      <g id="stops"></g>
+      <circle id="bead" class="bead" r="15" cx="0" cy="0" fill="url(#beadGrad)" tabindex="0"
+        role="slider" aria-label="Category" aria-valuetext="Everything" />
+    </svg>
+  </nav>
+
+  <main>
+    <!-- Coverflow gallery -->
+    <section class="gallery" aria-label="Photo gallery">
+      <button class="nav-arrow nav-prev" id="prev" aria-label="Previous photo">&#8249;</button>
+      <div class="coverflow" id="coverflow"></div>
+      <button class="nav-arrow nav-next" id="next" aria-label="Next photo">&#8250;</button>
+
+      <div class="gallery-info">
+        <p class="caption" id="caption"></p>
+        <p class="count" id="count"></p>
+      </div>
+    </section>
+
+    <!-- Artist statement -->
+    <section class="statement">
+      <p>
+        In a world where so many photographs are about generating a
+        <em>Fear of Missing Out</em>, I strive for the opposite: creating the joy
+        of being included. The focus is capturing the best moments between people,
+        the in-the-moment shots of a bird or chipmunk, or places that inspire me on
+        my own journey. It is about sharing experiences that trigger my own emotions,
+        hoping they&rsquo;ll do the same for others.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; Daniel Sturman</p>
+  </footer>
+
+  <script src="photos.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
