@@ -23,8 +23,12 @@ const PHOTOS = [
     category: "Places",
     caption: "The Patriarchs",
   }, // Zion canyon peaks
-  { file: "STURMAN_Stopped_2.jpg", category: "Critters", caption: "Great Blue" }, // great blue heron in flight
-  { file: "DSC_5609.jpg", category: "People", caption: "Lily (Portrait)" }, // woman in profile, b&w
+  {
+    file: "STURMAN_Stopped_2.jpg",
+    category: "Critters",
+    caption: "Great Blue",
+  }, // great blue heron in flight
+  { file: "DSC_5609.jpg", category: "People", caption: "Lily" }, // woman in profile, b&w
   {
     file: "Sturman_Urban_4.jpg",
     category: "Places",
@@ -45,7 +49,7 @@ const PHOTOS = [
   {
     file: "DSC_5452.jpg",
     category: "People",
-    caption: "Self-portrait: Aching foot",
+    caption: "Self: Aching foot",
   }, // man seated, b&w portrait
   { file: "DSC_0054.jpg", category: "Places", caption: "Transport" }, // SF streetcar on Market St
   { file: "DSC_2922.jpg", category: "Critters", caption: "Show your colors" }, // banana slug on a rock

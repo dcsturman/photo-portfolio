@@ -64,6 +64,7 @@ function buildCards() {
 
     card.appendChild(img);
     card.addEventListener("click", () => {
+      if (swipeHappened) return;            // a swipe shouldn't also promote a card
       if (i !== active) { active = i; layout(); updateInfo(); }
     });
 
@@ -78,27 +79,43 @@ function layout() {
 
   const W = coverflow.clientWidth;
   const H = coverflow.clientHeight;
-  // Big photo height — capped by width too, so the cascade always has room
-  // (otherwise on tall/large screens the hero would fill the whole width).
-  const activeH = Math.min(H * 0.86, W * 0.42);
-  const margin  = Math.max(W * 0.04, 64);   // gap before the big photo / room for arrow
+  // --- responsive sizing -------------------------------------------------
+  // Phones: one big photo + a small peek of the next. The hero is sized to
+  // FILL the screen by its own orientation (landscape fills the width,
+  // portrait fills the height), so it's large either way instead of being
+  // shrunk to make room for a 5-up cascade.
+  // Desktop: the full cascade, with the hero capped by width so it can't
+  // balloon and crowd out the cascade on large screens.
+  const mobile = W < 700;
 
-  // Every photo gets the SAME slot footprint, whatever its orientation, and the
-  // image is centered inside it. This keeps spacing even and stops narrow
-  // (portrait) photos from bunching the cascade over to the left.
-  const REF_ASPECT = 1.5;                    // uniform slot footprint (landscape-ish)
-  const slotW = activeH * REF_ASPECT;        // full-size slot width
-  const effVis = Math.min(VISIBLE, n);
+  let activeH, slotW, margin, step, shrink, effVis;
+  if (mobile) {
+    const heroAspect = ar[list[active].file] || 1.5;
+    activeH = Math.min(H * 0.92, (W * 0.86) / heroAspect);
+    slotW   = activeH * heroAspect;          // the hero's own width
+    margin  = W * 0.04;
+    step    = 0.8;                            // push the follower mostly off-screen (a peek)
+    shrink  = 0.7;
+    effVis  = Math.min(2, n);                 // hero + one follower
+  } else {
+    activeH = Math.min(H * 0.86, W * 0.42);
+    slotW   = activeH * 1.5;                  // uniform landscape-ish footprint
+    margin  = Math.max(W * 0.04, 64);
+    step    = STEP;
+    shrink  = SHRINK;
+    effVis  = Math.min(VISIBLE, n);
+  }
+
   const slotX = [];
   const slotS = [];
   let cursor = margin;
   for (let k = 0; k < effVis; k++) {
-    const s = Math.pow(SHRINK, k);
+    const s = Math.pow(shrink, k);
     slotX[k] = cursor;
     slotS[k] = s;
-    cursor += slotW * s * STEP;              // uniform spacing, orientation-independent
+    cursor += slotW * s * step;
   }
-  const parkRight = cursor;                  // where off-screen-right cards wait
+  const parkRight = cursor;                   // where off-screen-right cards wait
 
   cards.forEach((c, i) => {
     let off = ((i - active) % n + n) % n;     // 0..n-1
@@ -162,6 +179,38 @@ window.addEventListener("keydown", (e) => {
   else if (e.key === "ArrowLeft") prevPhoto();
 });
 window.addEventListener("resize", layout);
+
+/* ---- swipe to advance (touch / trackpad / mouse) ----
+   Tier 1: detect a horizontal flick and step one photo, reusing the arrows'
+   logic. We don't capture the pointer or preventDefault, so vertical page
+   scrolling is untouched; the CSS `touch-action: pan-y` lets the browser keep
+   vertical panning while we own horizontal gestures. */
+const SWIPE_MIN = 45;            // px of horizontal travel before it counts as a swipe
+let swipeHappened = false;       // set on a real swipe so the card click is ignored
+let swipeStartX = 0, swipeStartY = 0, swiping = false;
+
+coverflow.addEventListener("pointerdown", (e) => {
+  if (!e.isPrimary) return;      // ignore second finger (pinch, etc.)
+  swiping = true;
+  swipeHappened = false;
+  swipeStartX = e.clientX;
+  swipeStartY = e.clientY;
+});
+
+function endSwipe(e) {
+  if (!swiping) return;
+  swiping = false;
+  const dx = e.clientX - swipeStartX;
+  const dy = e.clientY - swipeStartY;
+  if (Math.abs(dx) >= SWIPE_MIN && Math.abs(dx) > Math.abs(dy)) {
+    swipeHappened = true;        // horizontal, far enough -> it's a swipe
+    if (dx < 0) nextPhoto();     // swipe left -> next
+    else prevPhoto();            // swipe right -> previous
+  }
+}
+
+window.addEventListener("pointerup", endSwipe);
+window.addEventListener("pointercancel", () => { swiping = false; });
 
 /* ============================================================
    3. Bead-on-a-wire category filter
