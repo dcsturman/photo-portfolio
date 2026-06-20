@@ -65,9 +65,9 @@ const PHOTOS = [
     category: "Places",
     caption: "Nature & Nurture",
   }, // desert pavilion framing a mesa
+  { file: "DSC_6076.jpg", category: "Places", caption: "Doorway" }, // Landscape through doorway
   { file: "DSC_0043.jpg", category: "Places", caption: "Many robots" }, // Waymo cars at an intersection
   { file: "STURMAN_Light_04.jpg", category: "Places", caption: "Shiny bugs" }, // backlit bokeh in an evergreen
   { file: "DSC_2550.jpg", category: "Places", caption: "Bucket" }, // red bucket on a weathered fence
   { file: "DSC_0365.jpg", category: "People", caption: "Can't beat the heat" }, // vendor at farmer's market
-  { file: "DSC_6076.jpg", category: "Places", caption: "Doorway" }, // Landscape through doorway
 ];
