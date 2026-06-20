@@ -56,6 +56,11 @@ const PHOTOS = [
   { file: "DSC_5469.jpg", category: "People", caption: "Unexpected friends" }, // woman beside a donkey at a fence
   { file: "Sturman_Urban_2.jpg", category: "Places", caption: "The Strand" }, // red ACT theater facade
   { file: "STURMAN_Light_01.jpg", category: "Critters", caption: "Luna" }, // dog in dramatic light, b&w
+  {
+    file: "Sturman_storytelling_07.jpg",
+    category: "People",
+    caption: "Italian Dream",
+  }, // Crepe maker at farmers market
   { file: "DSC_0077.jpg", category: "People", caption: "You be you" }, // person reclining on a bench, b&w
   { file: "DSC_0016.jpg", category: "Places", caption: "Pathways" }, // empty SF street, footbridge view
   { file: "DSC_2958.jpg", category: "Critters", caption: "Chill'n Chicken" }, // white hen in the coop
