@@ -29,7 +29,7 @@ const PHOTOS = [
     caption: "Great Blue",
   }, // great blue heron in flight
   { file: "DSC_5609.jpg", category: "People", caption: "Lily" }, // woman in profile, b&w
-  { file: "DSC_0181-2.jpg", category: "Critters", caption: "On the wing" }, // harrier in flight
+  { file: "DSC_0181.jpg", category: "Critters", caption: "On the wing" }, // harrier in flight
   {
     file: "Sturman_Urban_4.jpg",
     category: "Places",
