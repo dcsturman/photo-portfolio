@@ -29,6 +29,7 @@ const PHOTOS = [
     caption: "Great Blue",
   }, // great blue heron in flight
   { file: "DSC_5609.jpg", category: "People", caption: "Lily" }, // woman in profile, b&w
+  { file: "DSC_0181-2.jpg", category: "Critters", caption: "On the wing" }, // harrier in flight
   {
     file: "Sturman_Urban_4.jpg",
     category: "Places",
@@ -64,6 +65,7 @@ const PHOTOS = [
   { file: "DSC_0077.jpg", category: "People", caption: "You be you" }, // person reclining on a bench, b&w
   { file: "DSC_0016.jpg", category: "Places", caption: "Pathways" }, // empty SF street, footbridge view
   { file: "DSC_2958.jpg", category: "Critters", caption: "Chill'n Chicken" }, // white hen in the coop
+  { file: "DSC_2712.jpg", category: "People", caption: "Take a swing" }, // Padres batter swinging at a pitch.
   { file: "STURMAN_Light_03.jpg", category: "People", caption: "Family Photo" }, // two long shadows on pavement
   {
     file: "Sturman_Urban_1.jpg",
@@ -72,7 +74,9 @@ const PHOTOS = [
   }, // desert pavilion framing a mesa
   { file: "DSC_6076.jpg", category: "Places", caption: "Doorway" }, // Landscape through doorway
   { file: "DSC_0043.jpg", category: "Places", caption: "Many robots" }, // Waymo cars at an intersection
+  { file: "DSC_0482.jpg", category: "Critters", caption: "Brahman bull" }, // bull behind fence
   { file: "STURMAN_Light_04.jpg", category: "Places", caption: "Shiny bugs" }, // backlit bokeh in an evergreen
   { file: "DSC_2550.jpg", category: "Places", caption: "Bucket" }, // red bucket on a weathered fence
   { file: "DSC_0365.jpg", category: "People", caption: "Can't beat the heat" }, // vendor at farmer's market
+  { file: "DSC_0795.jpg", category: "Critter", caption: "Gotta scoot" }, // mocking bird moving off a bench
 ];
