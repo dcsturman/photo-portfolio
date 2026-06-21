@@ -78,5 +78,12 @@ const PHOTOS = [
   { file: "STURMAN_Light_04.jpg", category: "Critters", caption: "Shiny bugs" }, // backlit bokeh in an evergreen
   { file: "DSC_2550.jpg", category: "Places", caption: "Bucket" }, // red bucket on a weathered fence
   { file: "DSC_0365.jpg", category: "People", caption: "Can't beat the heat" }, // vendor at farmer's market
+  { file: "APC_0223.jpg", category: "Places", caption: "Mount Rainier" }, // Mount Rainier with Lumen Field and Mariners park in the forground
+  { file: "APC_0247.jpg", category: "Places", caption: "Round and round" }, // Ferris wheel
+  { file: "APC_0253.jpg", category: "People", caption: "Budding artist" }, // street artist spraypainting
+  { file: "APC_0263.jpg", category: "People", caption: "The Beat" }, // street musician drumming
+  { file: "APC_0266.jpg", category: "Places", caption: "United by Nature" }, // mural of a boy and a girl at huge size
+  { file: "APC_0275.jpg", category: "Places", caption: "Whats that?" }, // pigeon on top of old machinery
+  { file: "APC_0284.jpg", category: "Places", caption: "More shops" }, // slow exposure with movement of neon sign
   { file: "DSC_0795.jpg", category: "Critter", caption: "Gotta scoot" }, // mocking bird moving off a bench
 ];
