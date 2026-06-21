@@ -64,13 +64,42 @@ function buildCards() {
 
     card.appendChild(img);
     card.addEventListener("click", () => {
-      if (swipeHappened) return;            // a swipe shouldn't also promote a card
+      if (swipeHappened || longPressFired) return;  // a swipe/long-press shouldn't also promote a card
       if (i !== active) { active = i; layout(); updateInfo(); }
     });
+
+    // Double-click (mouse) expands to full screen.
+    card.addEventListener("dblclick", () => openLightbox(p));
+
+    // Long-press (touch / pen) expands to full screen.
+    attachLongPress(card, p);
 
     coverflow.appendChild(card);
     cards.push({ el: card, photo: p });
   });
+}
+
+/* ---- long-press to open the full-screen viewer on touch screens ---- */
+const LONG_PRESS_MS = 500;   // hold this long to expand
+const LONG_PRESS_MOVE = 12;  // px of drift allowed before it's treated as a swipe, not a press
+let longPressFired = false;  // set on a real long-press so the card click is ignored
+
+function attachLongPress(card, photo) {
+  let timer = null, sx = 0, sy = 0;
+  const cancel = () => { if (timer) { clearTimeout(timer); timer = null; } };
+
+  card.addEventListener("pointerdown", (e) => {
+    if (e.pointerType === "mouse" || !e.isPrimary) return;  // mouse uses double-click
+    longPressFired = false;
+    sx = e.clientX; sy = e.clientY;
+    cancel();
+    timer = setTimeout(() => { longPressFired = true; openLightbox(photo); }, LONG_PRESS_MS);
+  });
+  card.addEventListener("pointermove", (e) => {
+    if (timer && (Math.abs(e.clientX - sx) > LONG_PRESS_MOVE || Math.abs(e.clientY - sy) > LONG_PRESS_MOVE)) cancel();
+  });
+  card.addEventListener("pointerup", cancel);
+  card.addEventListener("pointercancel", cancel);
 }
 
 function layout() {
@@ -175,6 +204,7 @@ function prevPhoto() { const n = list.length; if (n) { active = (active - 1 + n)
 document.getElementById("next").addEventListener("click", nextPhoto);
 document.getElementById("prev").addEventListener("click", prevPhoto);
 window.addEventListener("keydown", (e) => {
+  if (lightbox.classList.contains("is-open")) return;  // don't shuffle the gallery behind the viewer
   if (e.key === "ArrowRight") nextPhoto();
   else if (e.key === "ArrowLeft") prevPhoto();
 });
@@ -211,6 +241,34 @@ function endSwipe(e) {
 
 window.addEventListener("pointerup", endSwipe);
 window.addEventListener("pointercancel", () => { swiping = false; });
+
+/* ============================================================
+   2b. Full-screen photo viewer (lightbox)
+   ============================================================ */
+const lightbox    = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+const lightboxClose = document.getElementById("lightboxClose");
+
+function openLightbox(photo) {
+  lightboxImg.src = "images/" + photo.file;
+  lightboxImg.alt = photo.caption || photo.file;
+  lightbox.classList.add("is-open");
+  lightbox.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";   // freeze the page behind it
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("is-open");
+  lightbox.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  lightboxImg.removeAttribute("src");         // free the full-res image
+}
+
+lightbox.addEventListener("click", closeLightbox);      // tap/click anywhere closes
+lightboxClose.addEventListener("click", closeLightbox);
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
+});
 
 /* ============================================================
    3. Bead-on-a-wire category filter
