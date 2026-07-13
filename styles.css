@@ -141,6 +141,9 @@ html, body {
   user-select: none;
   -webkit-user-drag: none;
 }
+/* A card whose photo is still downloading: a quiet warm tint rather than a
+   stark white hole. The card is already the right size, so nothing shifts. */
+.card.is-loading { background: #f1ede6; }
 
 /* ---------- Arrows ---------- */
 .nav-arrow {

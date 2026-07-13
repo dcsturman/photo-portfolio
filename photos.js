@@ -85,5 +85,5 @@ const PHOTOS = [
   { file: "APC_0266.jpg", category: "Places", caption: "United by Nature" }, // mural of a boy and a girl at huge size
   { file: "APC_0275.jpg", category: "Places", caption: "Whats that?" }, // pigeon on top of old machinery
   { file: "APC_0284.jpg", category: "Places", caption: "More shops" }, // slow exposure with movement of neon sign
-  { file: "DSC_0795.jpg", category: "Critter", caption: "Gotta scoot" }, // mocking bird moving off a bench
+  { file: "DSC_0795.jpg", category: "Critters", caption: "Gotta scoot" }, // mocking bird moving off a bench
 ];
