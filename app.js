@@ -223,6 +223,26 @@ function layout() {
   });
 }
 
+/* ---- analytics ----------------------------------------------------------
+   Safe whether or not Google Analytics is configured/loaded: if gtag is absent
+   (placeholder ID, ad blocker, offline preview) these calls just no-op. */
+function track(event, params) {
+  if (typeof gtag === "function") gtag("event", event, params || {});
+}
+
+/* Record which photo a visitor actually settles on, not every frame they flick
+   past. We wait ~900ms of stillness before logging a "photo_view", so swiping
+   through the gallery doesn't fire a dozen events. */
+let viewTimer = null;
+function trackPhotoView() {
+  clearTimeout(viewTimer);
+  const p = list[active];
+  if (!p) return;
+  viewTimer = setTimeout(() => {
+    track("photo_view", { photo: p.file, caption: p.caption || "" });
+  }, 900);
+}
+
 function updateInfo() {
   const n = list.length;
   if (!n) { captionEl.textContent = ""; countEl.textContent = ""; return; }
@@ -234,6 +254,7 @@ function updateInfo() {
       `<span class="cap-hint">add a caption in photos.js &mdash; ${p.file}</span>`;
   }
   countEl.textContent = `${active + 1} / ${n}`;
+  trackPhotoView();
 }
 
 function nextPhoto() { const n = list.length; if (n) { active = (active + 1) % n; layout(); updateInfo(); loadWindow(); } }
@@ -288,6 +309,7 @@ const lightboxImg = document.getElementById("lightboxImg");
 const lightboxClose = document.getElementById("lightboxClose");
 
 function openLightbox(photo) {
+  track("photo_expand", { photo: photo.file, caption: photo.caption || "" });
   lightboxImg.src = "images/" + photo.file;
   lightboxImg.alt = photo.caption || photo.file;
   lightbox.classList.add("is-open");
@@ -378,6 +400,7 @@ function selectStop(idx, animate) {
   if (animate) animateBeadTo(stops[idx].len);
   else setBeadAt(stops[idx].len);
   applyFilter(stops[idx].cat);
+  track("filter_select", { category: stops[idx].cat });  // user chose a category (not the initial load)
 }
 
 function animateBeadTo(target) {

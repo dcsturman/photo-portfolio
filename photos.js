@@ -86,4 +86,16 @@ const PHOTOS = [
   { file: "APC_0275.jpg", category: "Places", caption: "Whats that?" }, // pigeon on top of old machinery
   { file: "APC_0284.jpg", category: "Places", caption: "More shops" }, // slow exposure with movement of neon sign
   { file: "DSC_0795.jpg", category: "Critters", caption: "Gotta scoot" }, // mocking bird moving off a bench
+  { file: "APC_0315.jpg", category: "Places", caption: "" }, // TODO: set category (People/Places/Critters) & caption
+  { file: "APC_0326.jpg", category: "Places", caption: "" }, // TODO: set category (People/Places/Critters) & caption
+  { file: "APC_0344.jpg", category: "Places", caption: "" }, // TODO: set category (People/Places/Critters) & caption
+  { file: "DSC_0417.jpg", category: "Places", caption: "" }, // TODO: set category (People/Places/Critters) & caption
+  { file: "DSC_0425.jpg", category: "Places", caption: "" }, // TODO: set category (People/Places/Critters) & caption
+  { file: "DSC_0444.jpg", category: "Places", caption: "" }, // TODO: set category (People/Places/Critters) & caption
+  { file: "DSC_0467.jpg", category: "Places", caption: "" }, // TODO: set category (People/Places/Critters) & caption
+  { file: "DSC_0479.jpg", category: "Places", caption: "" }, // TODO: set category (People/Places/Critters) & caption
+  { file: "DSC_0495.jpg", category: "Places", caption: "" }, // TODO: set category (People/Places/Critters) & caption
+  { file: "DSC_0504.jpg", category: "Places", caption: "" }, // TODO: set category (People/Places/Critters) & caption
+  { file: "DSC_0509.jpg", category: "Places", caption: "" }, // TODO: set category (People/Places/Critters) & caption
+  { file: "DSC_0545.jpg", category: "Places", caption: "" }, // TODO: set category (People/Places/Critters) & caption
 ];
