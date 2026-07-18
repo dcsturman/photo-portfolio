@@ -28,7 +28,7 @@ Everything you'd normally change lives in `photos.js`:
 Drop new images into `images/`, then run:
 
 ```sh
-node scripts/prep-photos.js
+./scripts/prep-photos.sh
 ```
 
 It adds a skeleton line to `photos.js` for each new photo (you fill in the

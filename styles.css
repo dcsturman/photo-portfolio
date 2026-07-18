@@ -139,7 +139,9 @@ html, body {
   height: 100%;
   object-fit: contain;
   user-select: none;
+  -webkit-user-select: none;
   -webkit-user-drag: none;
+  -webkit-touch-callout: none;   /* suppress iOS long-press Save/Copy menu */
 }
 /* A card whose photo is still downloading: a quiet warm tint rather than a
    stark white hole. The card is already the right size, so nothing shifts. */
@@ -244,7 +246,9 @@ html, body {
   object-fit: contain;
   box-shadow: 0 24px 70px -20px rgba(0, 0, 0, 0.8);
   user-select: none;
+  -webkit-user-select: none;
   -webkit-user-drag: none;
+  -webkit-touch-callout: none;   /* suppress iOS long-press Save/Copy menu */
 }
 .lightbox-close {
   position: absolute;
